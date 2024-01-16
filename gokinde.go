@@ -12,7 +12,7 @@ var (
 	issuerUrl string
 )
 
-func SetupKinde(app *fiber.App, credentials KindeCredentials, urls KindeURLs) {
+func SetupKinde(app *fiber.App, credentials KindeCredentials) {
 	store = session.New(session.Config{
 		Expiration: 24 * 60 * 60, // 24 hours
 	})
@@ -29,7 +29,13 @@ func SetupKinde(app *fiber.App, credentials KindeCredentials, urls KindeURLs) {
 	}
 
 	issuerUrl = credentials.IssuerBaseUrl
-	// unAuthorisedRedirectUrl = credentials.UnAuthorisedUrl
 
-	defineRoutes(app, urls)
+	// URLs setup
+	kindeUrls := KindeURLs{
+		SiteUrl:         credentials.SiteUrl,
+		RedirectUrl:     credentials.RedirectUrl,
+		UnAuthorisedUrl: credentials.UnAuthorisedUrl,
+	}
+
+	defineRoutes(app, kindeUrls)
 }
