@@ -18,7 +18,9 @@ The Gokinde SDK is designed to integrate Kinde authentication with Go applicatio
 
 To use the Gokinde SDK in your Go Fiber application, first ensure you have Go and Fiber installed. Then, import the `gokinde` package in your Go application.
 
-## Usage
+```go
+go get github.com/venom90/kinde-gofiber
+```
 
 ### Setting up the SDK
 
@@ -29,7 +31,7 @@ To use the Gokinde SDK in your Go Fiber application, first ensure you have Go an
 
    import (
        "github.com/gofiber/fiber/v2"
-       "yourmodule/gokinde"
+       gokinde "github.com/venom90/kinde-gofiber"
    )
 
    func main() {
@@ -48,18 +50,6 @@ To use the Gokinde SDK in your Go Fiber application, first ensure you have Go an
        // ...
 
        app.Listen(":3000")
-   }
-   ```
-
-2. **Configure OAuth2 URLs**: Define the OAuth2 URLs for your application.
-
-   ```go
-   func setupKindeURLs() gokinde.KindeURLs {
-       return gokinde.KindeURLs{
-           SiteUrl:         "http://example.com",
-           RedirectUrl:     "http://example.com/redirect",
-           UnAuthorisedUrl: "http://example.com/unauthorized",
-       }
    }
    ```
 
