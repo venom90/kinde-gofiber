@@ -61,6 +61,34 @@ Implement custom handlers for login, registration, logout, and the OAuth2 callba
 
 The SDK uses Fiber's session middleware for managing user sessions. Ensure your application handles sessions correctly.
 
+## JWT Verification Middleware
+
+The `gokinde` SDK includes a `JWTVerify` middleware function designed to validate JWT tokens in requests to your Fiber application. It uses JWKS (JSON Web Key Sets) for token verification, ensuring that only tokens issued by a trusted source are accepted.
+
+### Functionality
+
+- **Token Parsing**: Extracts and parses the JWT token from the `Authorization` header of incoming requests.
+- **Token Validation**: Verifies the token using JWKS, checking its signature, issuer, and audience.
+- **Error Handling**: Rejects requests with invalid or expired tokens, sending a `403 Forbidden` status.
+
+### Usage
+
+To use `JWTVerify` in your Fiber application, initialize it with the issuer's URL and the expected audience for your tokens. Then, apply it as middleware to your routes:
+
+```go
+app := fiber.New()
+
+// Replace these with your actual issuer and audience values
+issuer := "https://example.com"
+audience := "your-audience"
+
+// Apply JWTVerify middleware to routes
+app.Use(gokinde.JWTVerify(issuer, audience))
+
+// Define your routes
+// ...
+```
+
 ## Contributing
 
 Contributions to the Gokinde SDK are welcome. Please ensure that your code adheres to the existing style and that all tests pass.
